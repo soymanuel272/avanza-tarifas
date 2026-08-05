@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tarifas · Avanza Rehabilitación Terapéutica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:#E8823C;
+    --green:#8FAE3E;
+    --blue:#3E8FC4;
+    --cream:#FBF8F3;
+    --ink:#2B2B2E;
+    --ink-soft:#6b6b70;
+    --card:#ffffff;
+    --line:#ECE7DD;
+    --radius:20px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px 60px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:44px 20px 84px;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(180deg,#fff 0%, var(--cream) 100%);
+  }
+  .logo-mark{
+    width:64px;height:64px;margin:0 auto 14px;
+    display:block;
+  }
+  .eyebrow{
+    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-soft);font-weight:600;margin:0 0 6px;
+  }
+  h1{
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    font-size:clamp(26px,7vw,34px);
+    line-height:1.15;
+    margin:0 0 8px;
+  }
+  .doctora{
+    font-size:14px;color:var(--ink-soft);margin:0;
+  }
+  .anio-badge{
+    display:inline-block;margin-top:16px;
+    padding:6px 16px;border-radius:999px;
+    font-size:13px;font-weight:600;letter-spacing:.02em;
+    background:#fff;border:1px solid var(--line);
+    color:var(--ink);
+  }
+
+  /* Goniometer arc — signature element, references range-of-motion tools used in physical therapy */
+  .arc-divider{display:block;width:100%;height:auto;margin-top:-2px;}
+
+  /* ---------- CATEGORY CARDS ---------- */
+  .categoria{
+    background:var(--card);
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+    padding:26px 22px 20px;
+    margin-bottom:22px;
+    box-shadow:0 1px 2px rgba(43,43,46,0.04);
+    position:relative;
+  }
+  .cat-head{
+    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  }
+  .cat-dot{
+    width:10px;height:10px;border-radius:50%;flex:none;
+  }
+  .cat-head h2{
+    font-family:'Sora',sans-serif;
+    font-size:19px;font-weight:700;margin:0;
+    letter-spacing:-.01em;
+  }
+  .item-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    gap:14px;padding:12px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .item-row:last-child{border-bottom:none;}
+  .item-label{font-size:15px;font-weight:500;color:var(--ink);}
+  .item-price{
+    font-variant-numeric:tabular-nums;
+    font-weight:700;font-size:16px;white-space:nowrap;
+    font-family:'Sora',sans-serif;
+  }
+  .item-row.destacado .item-price{color:var(--orange);}
+
+  /* ---------- NOTES ---------- */
+  .notas{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;margin-bottom:22px;
+  }
+  .notas h3{
+    font-family:'Sora',sans-serif;font-size:14px;text-transform:uppercase;
+    letter-spacing:.08em;margin:0 0 12px;color:var(--ink-soft);
+  }
+  .notas ul{margin:0;padding-left:18px;}
+  .notas li{font-size:13.5px;line-height:1.55;color:var(--ink);margin-bottom:8px;}
+  .notas li:last-child{margin-bottom:0;}
+  .duracion-chip{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--cream);border:1px solid var(--line);
+    padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600;
+    margin-bottom:14px;
+  }
+
+  .final-note{
+    text-align:center;font-size:13px;color:var(--ink-soft);
+    padding:6px 10px 0;line-height:1.6;
+  }
+
+  .footer-brand{
+    text-align:center;margin-top:28px;font-size:11px;color:#9a9a9e;
+    letter-spacing:.04em;
+  }
+
+  #loading{text-align:center;padding:80px 20px;color:var(--ink-soft);font-size:14px;}
+  #error-box{
+    display:none;background:#fff4f0;border:1px solid #f3c8b4;color:#8a3d1f;
+    padding:16px;border-radius:14px;font-size:13.5px;margin:20px;text-align:center;
+  }
+
+  /* admin gear */
+  #admin-toggle{
+    position:fixed;bottom:16px;right:16px;
+    width:40px;height:40px;border-radius:50%;
+    background:#fff;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;opacity:.35;transition:opacity .2s;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    z-index:50;
+  }
+  #admin-toggle:hover{opacity:.9;}
+  #admin-toggle svg{width:18px;height:18px;stroke:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<div id="loading">Cargando tarifas…</div>
+<div id="error-box"></div>
+
+<div class="wrap" id="content" style="display:none;">
+
+  <div class="hero">
+    <svg class="logo-mark" viewBox="0 0 64 64" fill="none">
+      <circle cx="26" cy="24" r="15" fill="var(--orange)" opacity="0.9"/>
+      <circle cx="40" cy="26" r="13" fill="var(--blue)" opacity="0.85"/>
+      <circle cx="30" cy="40" r="14" fill="var(--green)" opacity="0.85"/>
+      <circle cx="32" cy="30" r="7" fill="#fff"/>
+    </svg>
+    <p class="eyebrow">Consultorio de Terapia Física</p>
+    <h1 id="clinic-name">Avanza Rehabilitación Terapéutica</h1>
+    <p class="doctora" id="doctora-name"></p>
+    <span class="anio-badge">Tarifas <span id="anio-txt"></span></span>
+
+    <svg class="arc-divider" viewBox="0 0 640 70" preserveAspectRatio="none">
+      <path d="M0,0 C160,70 480,70 640,0 L640,70 L0,70 Z" fill="var(--cream)"/>
+      <path d="M60,8 A 260 260 0 0 0 580 8" stroke="var(--orange)" stroke-width="2.5" fill="none" opacity="0.55" stroke-linecap="round" stroke-dasharray="1 10"/>
+    </svg>
+  </div>
+
+  <div id="categorias-container"></div>
+
+  <div class="notas">
+    <span class="duracion-chip">⏱ Duración de la sesión: 55 min</span>
+    <h3>Información importante</h3>
+    <ul id="notas-list"></ul>
+  </div>
+
+  <p class="final-note" id="nota-final"></p>
+  <p class="footer-brand">NIT <span id="nit-txt"></span></p>
+</div>
+
+<div id="admin-toggle" title="Modo edición">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 005 15a1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+  </svg>
+</div>
+
+<script>
+const COP = new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 });
+const dotColors = ['var(--orange)','var(--blue)','var(--green)'];
+
+function render(data){
+  document.getElementById('clinic-name').textContent = 'Avanza Rehabilitación Terapéutica';
+  document.getElementById('doctora-name').textContent = data.doctora || '';
+  document.getElementById('anio-txt').textContent = data.anio || '';
+  document.getElementById('nit-txt').textContent = data.nit || '';
+
+  const cont = document.getElementById('categorias-container');
+  cont.innerHTML = '';
+  (data.categorias || []).forEach((cat, i) => {
+    const card = document.createElement('div');
+    card.className = 'categoria';
+    const color = dotColors[i % dotColors.length];
+    let rows = '';
+    (cat.items || []).forEach(item => {
+      const destacado = /paquete 10|10 sesiones/i.test(item.label) ? ' destacado' : '';
+      rows += `<div class="item-row${destacado}">
+        <span class="item-label">${item.label}</span>
+        <span class="item-price">${COP.format(item.precio)}</span>
+      </div>`;
+    });
+    card.innerHTML = `
+      <div class="cat-head">
+        <span class="cat-dot" style="background:${color}"></span>
+        <h2>${cat.nombre}</h2>
+      </div>
+      ${rows}`;
+    cont.appendChild(card);
+  });
+
+  const notasList = document.getElementById('notas-list');
+  notasList.innerHTML = '';
+  (data.notas || []).forEach(n => {
+    const li = document.createElement('li');
+    li.textContent = n;
+    notasList.appendChild(li);
+  });
+
+  document.getElementById('nota-final').textContent = data.notaFinal || '';
+
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+}
+
+function showError(msg){
+  document.getElementById('loading').style.display = 'none';
+  const box = document.getElementById('error-box');
+  box.style.display = 'block';
+  box.textContent = msg;
+}
+
+// Carga los datos desde precios.json (mismo directorio). Debe abrirse desde un servidor/hosting,
+// no como archivo local (file://), porque los navegadores bloquean esa lectura por seguridad.
+fetch('precios.json', { cache: 'no-store' })
+  .then(r => { if(!r.ok) throw new Error('No se encontró precios.json'); return r.json(); })
+  .then(render)
+  .catch(err => {
+    showError('No se pudieron cargar las tarifas (' + err.message + '). Verifica que "precios.json" esté publicado en la misma carpeta que esta página.');
+  });
+
+document.getElementById('admin-toggle').addEventListener('click', () => {
+  window.location.href = 'editor.html';
+});
+</script>
+</body>
+</html>
