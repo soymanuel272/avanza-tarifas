@@ -103,6 +103,7 @@
     <div class="field"><label>Doctora / responsable</label><input id="f-doctora" type="text"></div>
     <div class="field"><label>Año de las tarifas</label><input id="f-anio" type="text"></div>
     <div class="field"><label>NIT</label><input id="f-nit" type="text"></div>
+    <div class="field"><label>WhatsApp para citas (con indicativo)</label><input id="f-whatsapp" type="text" placeholder="573001234567"></div>
   </div>
 
   <div id="categorias-editor"></div>
@@ -171,6 +172,7 @@ function renderEditor(){
   document.getElementById('f-doctora').value = data.doctora || '';
   document.getElementById('f-anio').value = data.anio || '';
   document.getElementById('f-nit').value = data.nit || '';
+  document.getElementById('f-whatsapp').value = data.whatsapp || '';
   document.getElementById('f-notaFinal').value = data.notaFinal || '';
 
   const catCont = document.getElementById('categorias-editor');
@@ -244,9 +246,9 @@ document.getElementById('add-nota').addEventListener('click', () => {
   data.notas.push('Nueva nota');
   renderEditor();
 });
-['f-doctora','f-anio','f-nit','f-notaFinal'].forEach(id => {
+['f-doctora','f-anio','f-nit','f-whatsapp','f-notaFinal'].forEach(id => {
   document.getElementById(id).addEventListener('input', e => {
-    const map = { 'f-doctora':'doctora', 'f-anio':'anio', 'f-nit':'nit', 'f-notaFinal':'notaFinal' };
+    const map = { 'f-doctora':'doctora', 'f-anio':'anio', 'f-nit':'nit', 'f-whatsapp':'whatsapp', 'f-notaFinal':'notaFinal' };
     data[map[id]] = e.target.value;
   });
 });
@@ -290,7 +292,7 @@ fetch('precios.json', { cache: 'no-store' })
   .then(json => { data = json; renderEditor(); })
   .catch(() => {
     data = {
-      doctora: '', anio: '', nit: '',
+      doctora: '', anio: '', nit: '', whatsapp: '',
       categorias: [{ nombre: 'Nueva categoría', items: [{ label: 'Nuevo servicio', precio: 0 }] }],
       notas: [], notaFinal: ''
     };

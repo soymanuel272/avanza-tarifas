@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#F5F6F8">
+<meta name="description" content="Tarifas del consultorio de terapia física Avanza Rehabilitación Terapéutica.">
 <title>Tarifas · Avanza Rehabilitación Terapéutica</title>
+<link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -11,23 +14,25 @@
     --orange:#E8823C;
     --green:#8FAE3E;
     --blue:#3E8FC4;
-    --cream:#FBF8F3;
+    --bg:#F5F6F8;
     --ink:#2B2B2E;
     --ink-soft:#6b6b70;
     --card:#ffffff;
-    --line:#ECE7DD;
+    --line:#E7E9EC;
     --radius:20px;
+    --shadow:0 2px 10px rgba(20,20,30,.05), 0 1px 2px rgba(20,20,30,.04);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
-    background:var(--cream);
+    background:var(--bg);
     color:var(--ink);
     font-family:'Inter',system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;
     min-height:100vh;
   }
   .wrap{max-width:640px;margin:0 auto;padding:0 20px 60px;}
+  body.has-cta .wrap{padding-bottom:132px;}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -35,11 +40,26 @@
     padding:44px 20px 84px;
     text-align:center;
     overflow:hidden;
-    background:linear-gradient(180deg,#fff 0%, var(--cream) 100%);
+    background:linear-gradient(180deg,#fff 0%, var(--bg) 100%);
   }
+  .hero::before,.hero::after{
+    content:'';position:absolute;border-radius:50%;filter:blur(56px);z-index:0;
+  }
+  .hero::before{
+    width:220px;height:220px;top:-70px;left:-50px;background:var(--orange);opacity:.16;
+  }
+  .hero::after{
+    width:260px;height:260px;top:-30px;right:-70px;background:var(--blue);opacity:.14;
+  }
+  .hero-blob-green{
+    content:'';position:absolute;width:200px;height:200px;bottom:20px;left:50%;
+    transform:translateX(-50%);background:var(--green);opacity:.10;filter:blur(60px);
+    border-radius:50%;z-index:0;
+  }
+  .hero > *{position:relative;z-index:1;}
   .logo-mark{
-    width:180px;height:auto;margin:0 auto 10px;
-    display:block;
+    width:170px;height:auto;margin:0 auto 10px;
+    display:block;filter:drop-shadow(0 6px 16px rgba(43,43,46,.10));
   }
   .eyebrow{
     font-size:12px;letter-spacing:.14em;text-transform:uppercase;
@@ -56,35 +76,38 @@
     font-size:14px;color:var(--ink-soft);margin:0;
   }
   .anio-badge{
-    display:inline-block;margin-top:16px;
-    padding:6px 16px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:6px;margin-top:16px;
+    padding:7px 16px 7px 12px;border-radius:999px;
     font-size:13px;font-weight:600;letter-spacing:.02em;
     background:#fff;border:1px solid var(--line);
-    color:var(--ink);
+    color:var(--ink);box-shadow:var(--shadow);
   }
+  .anio-badge svg{width:14px;height:14px;stroke:var(--orange);flex:none;}
 
   /* Goniometer arc — signature element, references range-of-motion tools used in physical therapy */
-  .arc-divider{display:block;width:100%;height:auto;margin-top:-2px;}
+  .arc-divider{display:block;width:100%;height:auto;margin-top:-2px;position:relative;z-index:1;}
 
   /* ---------- CATEGORY CARDS ---------- */
   .categoria{
     background:var(--card);
     border-radius:var(--radius);
     border:1px solid var(--line);
-    padding:26px 22px 20px;
-    margin-bottom:22px;
-    box-shadow:0 1px 2px rgba(43,43,46,0.04);
+    padding:22px 22px 18px;
+    margin-bottom:18px;
+    box-shadow:var(--shadow);
     position:relative;
   }
   .cat-head{
-    display:flex;align-items:center;gap:10px;margin-bottom:18px;
+    display:flex;align-items:center;gap:12px;margin-bottom:16px;
   }
-  .cat-dot{
-    width:10px;height:10px;border-radius:50%;flex:none;
+  .cat-icon{
+    width:44px;height:44px;border-radius:14px;flex:none;
+    display:flex;align-items:center;justify-content:center;
   }
+  .cat-icon svg{width:22px;height:22px;}
   .cat-head h2{
     font-family:'Sora',sans-serif;
-    font-size:19px;font-weight:700;margin:0;
+    font-size:18px;font-weight:700;margin:0;
     letter-spacing:-.01em;
   }
   .item-row{
@@ -99,26 +122,28 @@
     font-weight:700;font-size:16px;white-space:nowrap;
     font-family:'Sora',sans-serif;
   }
-  .item-row.destacado .item-price{color:var(--orange);}
+  .item-row.destacado{
+    background:rgba(232,130,60,.07);
+    border-radius:12px;margin:4px -12px 0;padding:12px;
+    border-bottom:none;
+  }
+  .item-row.destacado .item-label{font-weight:600;}
+  .item-row.destacado .item-price{color:var(--orange);font-size:17.5px;}
 
   /* ---------- NOTES ---------- */
   .notas{
     background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:22px;margin-bottom:22px;
+    padding:22px;margin-bottom:22px;box-shadow:var(--shadow);
   }
   .notas h3{
-    font-family:'Sora',sans-serif;font-size:14px;text-transform:uppercase;
+    font-family:'Sora',sans-serif;font-size:13px;text-transform:uppercase;
     letter-spacing:.08em;margin:0 0 12px;color:var(--ink-soft);
+    display:flex;align-items:center;gap:7px;
   }
+  .notas h3 svg{width:15px;height:15px;stroke:var(--blue);flex:none;}
   .notas ul{margin:0;padding-left:18px;}
   .notas li{font-size:13.5px;line-height:1.55;color:var(--ink);margin-bottom:8px;}
   .notas li:last-child{margin-bottom:0;}
-  .duracion-chip{
-    display:inline-flex;align-items:center;gap:6px;
-    background:var(--cream);border:1px solid var(--line);
-    padding:6px 12px;border-radius:999px;font-size:12.5px;font-weight:600;
-    margin-bottom:14px;
-  }
 
   .final-note{
     text-align:center;font-size:13px;color:var(--ink-soft);
@@ -136,18 +161,37 @@
     padding:16px;border-radius:14px;font-size:13.5px;margin:20px;text-align:center;
   }
 
+  /* ---------- CTA BAR (agendar cita) ---------- */
+  .cta-bar{
+    display:none;position:fixed;left:0;right:0;bottom:0;z-index:45;
+    padding:18px 20px calc(16px + env(safe-area-inset-bottom));
+    background:linear-gradient(180deg, rgba(245,246,248,0) 0%, var(--bg) 32%);
+  }
+  .cta-btn{
+    display:flex;align-items:center;justify-content:center;gap:9px;
+    max-width:600px;margin:0 auto;width:100%;
+    padding:15px 20px;border-radius:999px;
+    background:linear-gradient(135deg,var(--blue),var(--green));
+    color:#fff;font-weight:700;font-size:15.5px;
+    font-family:'Inter',sans-serif;text-decoration:none;
+    box-shadow:0 10px 24px rgba(62,143,196,.32);
+    border:none;cursor:pointer;
+  }
+  .cta-btn svg{width:19px;height:19px;flex:none;}
+
   /* admin gear */
   #admin-toggle{
     position:fixed;bottom:16px;right:16px;
-    width:40px;height:40px;border-radius:50%;
+    width:38px;height:38px;border-radius:50%;
     background:#fff;border:1px solid var(--line);
     display:flex;align-items:center;justify-content:center;
-    cursor:pointer;opacity:.35;transition:opacity .2s;
+    cursor:pointer;opacity:.32;transition:opacity .2s, bottom .2s;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
     z-index:50;
   }
+  body.has-cta #admin-toggle{bottom:92px;}
   #admin-toggle:hover{opacity:.9;}
-  #admin-toggle svg{width:18px;height:18px;stroke:var(--ink-soft);}
+  #admin-toggle svg{width:17px;height:17px;stroke:var(--ink-soft);}
 </style>
 </head>
 <body>
@@ -158,15 +202,18 @@
 <div class="wrap" id="content" style="display:none;">
 
   <div class="hero">
+    <div class="hero-blob-green"></div>
     <img class="logo-mark" src="logo.png" alt="Avanza Rehabilitación Terapéutica">
-    <noscript></noscript>
     <p class="eyebrow">Consultorio de Terapia Física</p>
     <h1 id="clinic-name">Avanza Rehabilitación Terapéutica</h1>
     <p class="doctora" id="doctora-name"></p>
-    <span class="anio-badge">Tarifas <span id="anio-txt"></span></span>
+    <span class="anio-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+      Tarifas <span id="anio-txt"></span>
+    </span>
 
     <svg class="arc-divider" viewBox="0 0 640 70" preserveAspectRatio="none">
-      <path d="M0,0 C160,70 480,70 640,0 L640,70 L0,70 Z" fill="var(--cream)"/>
+      <path d="M0,0 C160,70 480,70 640,0 L640,70 L0,70 Z" fill="var(--bg)"/>
       <path d="M60,8 A 260 260 0 0 0 580 8" stroke="var(--orange)" stroke-width="2.5" fill="none" opacity="0.55" stroke-linecap="round" stroke-dasharray="1 10"/>
     </svg>
   </div>
@@ -174,13 +221,22 @@
   <div id="categorias-container"></div>
 
   <div class="notas">
-    <span class="duracion-chip">⏱ Duración de la sesión: 55 min</span>
-    <h3>Información importante</h3>
+    <h3>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+      Información importante
+    </h3>
     <ul id="notas-list"></ul>
   </div>
 
   <p class="final-note" id="nota-final"></p>
   <p class="footer-brand">NIT <span id="nit-txt"></span></p>
+</div>
+
+<div class="cta-bar" id="cta-bar">
+  <a class="cta-btn" id="cta-btn" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M9 15l1.8 1.8L15 13"/></svg>
+    Agendar Cita Ahora
+  </a>
 </div>
 
 <div id="admin-toggle" title="Modo edición">
@@ -192,7 +248,21 @@
 
 <script>
 const COP = new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 });
-const dotColors = ['var(--orange)','var(--blue)','var(--green)'];
+const dotColors = ['orange','blue','green'];
+const colorVars = { orange:'#E8823C', blue:'#3E8FC4', green:'#8FAE3E' };
+
+const ICONS = {
+  flor: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>`,
+  goniometro: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 L6 4"/><path d="M6 18 L19 11"/><path d="M10 18 A6 6 0 0 1 8.2 13.6"/><circle cx="6" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg>`,
+  general: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12"/></svg>`
+};
+
+function iconFor(nombre){
+  const n = (nombre || '').toLowerCase();
+  if(/p[eé]lvic|suelo/.test(n)) return ICONS.flor;
+  if(/f[ií]sica|terapia/.test(n)) return ICONS.goniometro;
+  return ICONS.general;
+}
 
 function render(data){
   document.getElementById('clinic-name').textContent = 'Avanza Rehabilitación Terapéutica';
@@ -205,7 +275,8 @@ function render(data){
   (data.categorias || []).forEach((cat, i) => {
     const card = document.createElement('div');
     card.className = 'categoria';
-    const color = dotColors[i % dotColors.length];
+    const colorName = dotColors[i % dotColors.length];
+    const color = colorVars[colorName];
     let rows = '';
     (cat.items || []).forEach(item => {
       const destacado = /paquete 10|10 sesiones/i.test(item.label) ? ' destacado' : '';
@@ -216,7 +287,7 @@ function render(data){
     });
     card.innerHTML = `
       <div class="cat-head">
-        <span class="cat-dot" style="background:${color}"></span>
+        <span class="cat-icon" style="background:${color}1F;color:${color}">${iconFor(cat.nombre)}</span>
         <h2>${cat.nombre}</h2>
       </div>
       ${rows}`;
@@ -232,6 +303,14 @@ function render(data){
   });
 
   document.getElementById('nota-final').textContent = data.notaFinal || '';
+
+  if(data.whatsapp){
+    const phone = String(data.whatsapp).replace(/\D/g,'');
+    const msg = encodeURIComponent('Hola, quiero agendar una cita en Avanza Rehabilitación Terapéutica.');
+    document.getElementById('cta-btn').href = `https://wa.me/${phone}?text=${msg}`;
+    document.getElementById('cta-bar').style.display = 'block';
+    document.body.classList.add('has-cta');
+  }
 
   document.getElementById('loading').style.display = 'none';
   document.getElementById('content').style.display = 'block';
