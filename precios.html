@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#F5F6F8">
+<meta name="theme-color" content="#2E7FB8">
 <meta name="description" content="Tarifas del consultorio de terapia física Avanza Rehabilitación Terapéutica.">
 <title>Tarifas · Avanza Rehabilitación Terapéutica</title>
 <link rel="icon" href="logo.png">
@@ -14,13 +14,12 @@
     --orange:#E8823C;
     --green:#8FAE3E;
     --blue:#3E8FC4;
-    --bg:#F5F6F8;
-    --ink:#2B2B2E;
-    --ink-soft:#6b6b70;
-    --card:#ffffff;
-    --line:#E7E9EC;
-    --radius:20px;
-    --shadow:0 2px 10px rgba(20,20,30,.05), 0 1px 2px rgba(20,20,30,.04);
+    --bg:#F3F5F8;
+    --ink:#20232A;
+    --ink-soft:#656b75;
+    --line:#E4E8ED;
+    --shadow:0 2px 10px rgba(20,30,50,.05), 0 1px 2px rgba(20,30,50,.05);
+    --shadow-lg:0 14px 34px rgba(20,40,70,.09), 0 2px 6px rgba(20,40,70,.05);
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -31,129 +30,196 @@
     -webkit-font-smoothing:antialiased;
     min-height:100vh;
   }
-  .wrap{max-width:640px;margin:0 auto;padding:0 20px 60px;}
-  body.has-cta .wrap{padding-bottom:132px;}
+  svg{display:block;}
+
+  @keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+  .reveal{animation:up .65s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 90ms);}
+  @media (prefers-reduced-motion:reduce){.reveal{animation:none;}}
 
   /* ---------- HERO ---------- */
   .hero{
-    position:relative;
-    padding:44px 20px 84px;
-    text-align:center;
-    overflow:hidden;
-    background:linear-gradient(180deg,#fff 0%, var(--bg) 100%);
+    position:relative;overflow:hidden;
+    padding:34px 20px 104px;
+    text-align:center;color:#fff;
+    background:
+      radial-gradient(circle at 10% 6%, rgba(232,130,60,.55) 0, rgba(232,130,60,0) 38%),
+      radial-gradient(circle at 94% 0%, rgba(255,255,255,.22) 0, rgba(255,255,255,0) 40%),
+      linear-gradient(155deg,#2A7AB5 0%,#3797B6 55%,#6DA950 100%);
   }
-  .hero::before,.hero::after{
-    content:'';position:absolute;border-radius:50%;filter:blur(56px);z-index:0;
+  .hero-arcs{
+    position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+    width:max(620px,120%);height:auto;pointer-events:none;
   }
-  .hero::before{
-    width:220px;height:220px;top:-70px;left:-50px;background:var(--orange);opacity:.16;
+  .hero-in{position:relative;max-width:680px;margin:0 auto;}
+  .logo-card{
+    display:inline-flex;background:#fff;border-radius:28px;padding:14px 22px;
+    box-shadow:0 18px 38px rgba(8,40,75,.30), 0 2px 6px rgba(8,40,75,.15);
+    margin-bottom:22px;
   }
-  .hero::after{
-    width:260px;height:260px;top:-30px;right:-70px;background:var(--blue);opacity:.14;
-  }
-  .hero-blob-green{
-    content:'';position:absolute;width:200px;height:200px;bottom:20px;left:50%;
-    transform:translateX(-50%);background:var(--green);opacity:.10;filter:blur(60px);
-    border-radius:50%;z-index:0;
-  }
-  .hero > *{position:relative;z-index:1;}
-  .logo-mark{
-    width:170px;height:auto;margin:0 auto 10px;
-    display:block;filter:drop-shadow(0 6px 16px rgba(43,43,46,.10));
-  }
+  .logo-mark{width:128px;height:auto;display:block;}
   .eyebrow{
-    font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--ink-soft);font-weight:600;margin:0 0 6px;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    font-weight:600;margin:0 0 8px;color:rgba(255,255,255,.92);
+    text-shadow:0 1px 2px rgba(0,30,60,.25);
   }
   h1{
-    font-family:'Sora',sans-serif;
-    font-weight:700;
-    font-size:clamp(26px,7vw,34px);
-    line-height:1.15;
-    margin:0 0 8px;
+    font-family:'Sora',sans-serif;font-weight:800;
+    font-size:clamp(34px,10vw,48px);line-height:1.05;letter-spacing:-.02em;
+    margin:0 0 16px;text-shadow:0 2px 12px rgba(0,30,60,.25);
   }
   .doctora{
-    font-size:14px;color:var(--ink-soft);margin:0;
+    display:inline-flex;align-items:center;gap:8px;margin:0;
+    padding:8px 16px 8px 12px;border-radius:999px;
+    font-size:13.5px;font-weight:600;
+    background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.38);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   }
-  .anio-badge{
-    display:inline-flex;align-items:center;gap:6px;margin-top:16px;
-    padding:7px 16px 7px 12px;border-radius:999px;
-    font-size:13px;font-weight:600;letter-spacing:.02em;
-    background:#fff;border:1px solid var(--line);
-    color:var(--ink);box-shadow:var(--shadow);
-  }
-  .anio-badge svg{width:14px;height:14px;stroke:var(--orange);flex:none;}
+  .doctora svg{width:16px;height:16px;flex:none;}
+  .hero-wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:64px;}
 
-  /* Goniometer arc — signature element, references range-of-motion tools used in physical therapy */
-  .arc-divider{display:block;width:100%;height:auto;margin-top:-2px;position:relative;z-index:1;}
+  /* ---------- LAYOUT ---------- */
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px 60px;}
+  body.has-cta .wrap{padding-bottom:132px;}
+
+  /* ---------- HIGHLIGHT TILES ---------- */
+  .destacados{
+    position:relative;z-index:2;margin:-62px auto 34px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;
+  }
+  .tile{
+    background:#fff;border-radius:20px;padding:16px 4px 14px;text-align:center;
+    box-shadow:var(--shadow-lg);border:1px solid var(--line);
+  }
+  .tile-ico{
+    width:40px;height:40px;border-radius:14px;margin:0 auto 10px;
+    display:grid;place-items:center;background:var(--soft);color:var(--c);
+  }
+  .tile-ico svg{width:21px;height:21px;}
+  .tile b{display:block;font-family:'Sora',sans-serif;font-size:clamp(11.5px,3.2vw,15.5px);font-weight:700;line-height:1.15;overflow-wrap:break-word;}
+  .tile span{display:block;font-size:11.5px;color:var(--ink-soft);margin-top:4px;line-height:1.35;}
+
+  /* ---------- SECTION HEAD ---------- */
+  .sec-head{text-align:center;margin:0 0 20px;}
+  .sec-eyebrow{
+    display:block;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--orange);margin-bottom:6px;
+  }
+  .sec-head h2{
+    font-family:'Sora',sans-serif;font-size:clamp(22px,6vw,27px);font-weight:700;
+    letter-spacing:-.015em;margin:0;
+  }
+  .sec-head h2::after{
+    content:'';display:block;width:46px;height:4px;border-radius:4px;margin:12px auto 0;
+    background:linear-gradient(90deg,var(--orange),var(--green));
+  }
 
   /* ---------- CATEGORY CARDS ---------- */
+  .cats{display:grid;grid-template-columns:1fr;gap:22px;margin-bottom:26px;align-items:start;}
   .categoria{
-    background:var(--card);
-    border-radius:var(--radius);
-    border:1px solid var(--line);
-    padding:22px 22px 18px;
-    margin-bottom:18px;
-    box-shadow:var(--shadow);
-    position:relative;
+    background:#fff;border-radius:28px;border:1px solid var(--line);
+    box-shadow:var(--shadow-lg);overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease;
   }
-  .cat-head{
-    display:flex;align-items:center;gap:12px;margin-bottom:16px;
+  @media (hover:hover){
+    .categoria:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(20,40,70,.13), 0 2px 6px rgba(20,40,70,.05);}
   }
-  .cat-icon{
-    width:44px;height:44px;border-radius:14px;flex:none;
-    display:flex;align-items:center;justify-content:center;
+  .categoria::before{
+    content:'';display:block;height:6px;
+    background:linear-gradient(90deg,var(--c),var(--c2));
   }
-  .cat-icon svg{width:22px;height:22px;}
-  .cat-head h2{
-    font-family:'Sora',sans-serif;
-    font-size:18px;font-weight:700;margin:0;
-    letter-spacing:-.01em;
+  .cat-top{background:linear-gradient(135deg,var(--soft) 0%,#fff 85%);padding-bottom:6px;}
+  .cat-head{display:flex;align-items:center;gap:16px;padding:20px 20px 12px;}
+  .cat-art{
+    width:84px;height:84px;flex:none;border-radius:26px;background:#fff;color:var(--c);
+    display:grid;place-items:center;
+    box-shadow:0 10px 22px var(--glow), inset 0 0 0 1.5px var(--soft);
   }
+  .cat-art svg{width:60px;height:60px;}
+  .cat-title{
+    font-family:'Sora',sans-serif;font-size:20px;font-weight:700;line-height:1.2;
+    letter-spacing:-.01em;margin:0;
+  }
+  .cat-desc{font-size:13.5px;color:var(--ink-soft);margin:0;padding:0 20px 14px;line-height:1.55;}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;padding:0 20px 8px;}
+  .tag{
+    font-size:11.5px;font-weight:600;color:var(--cd);background:var(--soft);
+    padding:5px 11px;border-radius:999px;
+  }
+  .rows{padding:8px 20px 20px;}
   .item-row{
-    display:flex;justify-content:space-between;align-items:baseline;
-    gap:14px;padding:12px 0;
+    display:flex;align-items:center;gap:12px;padding:13px 0;
     border-bottom:1px dashed var(--line);
   }
   .item-row:last-child{border-bottom:none;}
-  .item-label{font-size:15px;font-weight:500;color:var(--ink);}
+  .item-ico{
+    width:36px;height:36px;border-radius:12px;flex:none;
+    display:grid;place-items:center;background:var(--soft);color:var(--c);
+  }
+  .item-ico svg{width:18px;height:18px;}
+  .item-main{flex:1;min-width:0;}
+  .item-label{display:block;font-size:15px;font-weight:600;line-height:1.25;}
+  .item-sub{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:3px;font-size:12px;color:var(--ink-soft);}
+  .save{
+    font-weight:700;font-size:11px;color:#4F6A17;background:rgba(143,174,62,.20);
+    padding:2px 8px;border-radius:999px;white-space:nowrap;
+  }
   .item-price{
-    font-variant-numeric:tabular-nums;
-    font-weight:700;font-size:16px;white-space:nowrap;
+    font-variant-numeric:tabular-nums;font-weight:700;font-size:16px;white-space:nowrap;
     font-family:'Sora',sans-serif;
   }
   .item-row.destacado{
-    background:rgba(232,130,60,.07);
-    border-radius:12px;margin:4px -12px 0;padding:12px;
-    border-bottom:none;
+    position:relative;margin:16px -14px 0;padding:15px 14px;border-bottom:none;
+    border-radius:18px;background:linear-gradient(135deg,rgba(232,130,60,.13),rgba(232,130,60,.05));
+    box-shadow:inset 0 0 0 1.5px rgba(232,130,60,.30);
   }
-  .item-row.destacado .item-label{font-weight:600;}
-  .item-row.destacado .item-price{color:var(--orange);font-size:17.5px;}
+  .item-row.destacado .item-ico{background:var(--orange);color:#fff;}
+  .item-row.destacado .item-price{color:#D4691A;font-size:19px;}
+  .badge-best{
+    position:absolute;top:-10px;left:14px;background:var(--orange);color:#fff;
+    font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+    padding:3px 10px;border-radius:999px;box-shadow:0 4px 10px rgba(232,130,60,.35);
+  }
 
   /* ---------- NOTES ---------- */
   .notas{
-    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
-    padding:22px;margin-bottom:22px;box-shadow:var(--shadow);
+    position:relative;background:#fff;border:1px solid var(--line);border-radius:24px;
+    padding:22px 22px 22px 26px;margin-bottom:18px;box-shadow:var(--shadow);overflow:hidden;
+  }
+  .notas::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:5px;
+    background:linear-gradient(180deg,var(--blue),var(--green));
   }
   .notas h3{
     font-family:'Sora',sans-serif;font-size:13px;text-transform:uppercase;
-    letter-spacing:.08em;margin:0 0 12px;color:var(--ink-soft);
-    display:flex;align-items:center;gap:7px;
+    letter-spacing:.09em;margin:0 0 14px;color:var(--ink);
+    display:flex;align-items:center;gap:9px;
   }
-  .notas h3 svg{width:15px;height:15px;stroke:var(--blue);flex:none;}
-  .notas ul{margin:0;padding-left:18px;}
-  .notas li{font-size:13.5px;line-height:1.55;color:var(--ink);margin-bottom:8px;}
+  .notas h3 svg{width:22px;height:22px;color:var(--blue);flex:none;}
+  .notas ul{margin:0;padding:0;list-style:none;}
+  .notas li{
+    position:relative;padding-left:22px;font-size:13.5px;line-height:1.6;color:#33373f;margin-bottom:10px;
+  }
   .notas li:last-child{margin-bottom:0;}
+  .notas li::before{
+    content:'';position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:50%;
+    background:var(--blue);box-shadow:0 0 0 3px rgba(62,143,196,.18);
+  }
 
   .final-note{
-    text-align:center;font-size:13px;color:var(--ink-soft);
-    padding:6px 10px 0;line-height:1.6;
+    display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:22px;margin-bottom:6px;
+    background:linear-gradient(135deg,rgba(62,143,196,.11),rgba(143,174,62,.14));
+    border:1px solid rgba(62,143,196,.18);
+    font-size:13.5px;line-height:1.55;color:#33373f;font-weight:500;
   }
+  .final-note .fn-ico{
+    width:42px;height:42px;border-radius:50%;flex:none;display:grid;place-items:center;
+    background:#fff;color:var(--blue);box-shadow:var(--shadow);
+  }
+  .final-note .fn-ico svg{width:22px;height:22px;}
 
-  .footer-brand{
-    text-align:center;margin-top:28px;font-size:11px;color:#9a9a9e;
-    letter-spacing:.04em;
-  }
+  .footer-brand{text-align:center;margin-top:34px;font-size:11.5px;color:#8a9099;letter-spacing:.03em;line-height:1.7;}
+  .footer-brand img{width:70px;height:auto;display:block;margin:0 auto 10px;opacity:.9;}
+  .footer-brand b{color:#5c626c;font-weight:600;}
 
   #loading{text-align:center;padding:80px 20px;color:var(--ink-soft);font-size:14px;}
   #error-box{
@@ -161,21 +227,20 @@
     padding:16px;border-radius:14px;font-size:13.5px;margin:20px;text-align:center;
   }
 
-  /* ---------- CTA BAR (agendar cita) ---------- */
+  /* ---------- CTA BAR ---------- */
   .cta-bar{
     display:none;position:fixed;left:0;right:0;bottom:0;z-index:45;
     padding:18px 20px calc(16px + env(safe-area-inset-bottom));
-    background:linear-gradient(180deg, rgba(245,246,248,0) 0%, var(--bg) 32%);
+    background:linear-gradient(180deg, rgba(243,245,248,0) 0%, var(--bg) 32%);
   }
   .cta-btn{
     display:flex;align-items:center;justify-content:center;gap:9px;
-    max-width:600px;margin:0 auto;width:100%;
+    max-width:640px;margin:0 auto;width:100%;
     padding:15px 20px;border-radius:999px;
-    background:linear-gradient(135deg,var(--blue),var(--green));
+    background:linear-gradient(135deg,#2A7AB5,#6DA950);
     color:#fff;font-weight:700;font-size:15.5px;
     font-family:'Inter',sans-serif;text-decoration:none;
-    box-shadow:0 10px 24px rgba(62,143,196,.32);
-    border:none;cursor:pointer;
+    box-shadow:0 10px 24px rgba(42,122,181,.34);
   }
   .cta-btn svg{width:19px;height:19px;flex:none;}
 
@@ -192,6 +257,29 @@
   body.has-cta #admin-toggle{bottom:92px;}
   #admin-toggle:hover{opacity:.9;}
   #admin-toggle svg{width:17px;height:17px;stroke:var(--ink-soft);}
+
+  /* ---------- CELULARES CHICOS ---------- */
+  @media (max-width:420px){
+    .cat-head,.cat-desc,.tags{padding-left:16px;padding-right:16px;}
+    .rows{padding:8px 16px 18px;}
+    .item-row{gap:10px;}
+    .item-ico{width:30px;height:30px;border-radius:10px;}
+    .item-ico svg{width:16px;height:16px;}
+    .item-label{font-size:14px;}
+    .item-price{font-size:15px;}
+    .item-row.destacado{margin-left:-12px;margin-right:-12px;padding:15px 12px;}
+    .item-row.destacado .item-price{font-size:17px;}
+    .badge-best{left:12px;}
+  }
+
+  /* ---------- DESKTOP ---------- */
+  @media (min-width:1000px){
+    .wrap{max-width:1000px;}
+    .destacados{max-width:680px;}
+    .cats{grid-template-columns:1fr 1fr;gap:26px;}
+    .notas,.final-note{max-width:680px;margin-left:auto;margin-right:auto;}
+    .final-note{margin-bottom:6px;}
+  }
 </style>
 </head>
 <body>
@@ -199,42 +287,65 @@
 <div id="loading">Cargando tarifas…</div>
 <div id="error-box"></div>
 
-<div class="wrap" id="content" style="display:none;">
+<div id="content" style="display:none;">
 
-  <div class="hero">
-    <div class="hero-blob-green"></div>
-    <img class="logo-mark" src="logo.png" alt="Avanza Rehabilitación Terapéutica">
-    <p class="eyebrow">Consultorio de Terapia Física</p>
-    <h1 id="clinic-name">Avanza Rehabilitación Terapéutica</h1>
-    <p class="doctora" id="doctora-name"></p>
-    <span class="anio-badge">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
-      Tarifas <span id="anio-txt"></span>
-    </span>
-
-    <svg class="arc-divider" viewBox="0 0 640 70" preserveAspectRatio="none">
-      <path d="M0,0 C160,70 480,70 640,0 L640,70 L0,70 Z" fill="var(--bg)"/>
-      <path d="M60,8 A 260 260 0 0 0 580 8" stroke="var(--orange)" stroke-width="2.5" fill="none" opacity="0.55" stroke-linecap="round" stroke-dasharray="1 10"/>
+  <header class="hero">
+    <svg class="hero-arcs" viewBox="0 0 640 330" fill="none" aria-hidden="true">
+      <circle cx="320" cy="330" r="310" stroke="#fff" stroke-opacity=".20" stroke-width="12" stroke-dasharray="1.5 11.4"/>
+      <circle cx="320" cy="330" r="252" stroke="#fff" stroke-opacity=".16" stroke-width="2"/>
+      <circle cx="320" cy="330" r="196" stroke="#fff" stroke-opacity=".12" stroke-width="2"/>
+      <circle cx="320" cy="330" r="140" stroke="#fff" stroke-opacity=".10" stroke-width="2"/>
     </svg>
-  </div>
+    <div class="hero-in">
+      <div class="logo-card reveal" style="--i:0">
+        <img class="logo-mark" src="logo.png" alt="Avanza Rehabilitación Terapéutica">
+      </div>
+      <p class="eyebrow reveal" style="--i:1" id="eyebrow">Consultorio de Terapia Física</p>
+      <h1 class="reveal" style="--i:2" id="hero-title">Tarifas</h1>
+      <p class="doctora reveal" style="--i:3" id="doctora-pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        <span id="doctora-name"></span>
+      </p>
+    </div>
+    <svg class="hero-wave" viewBox="0 0 1440 64" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 34C220 70 430 70 700 44C980 18 1200 8 1440 40V64H0Z" fill="#F3F5F8"/>
+    </svg>
+  </header>
 
-  <div id="categorias-container"></div>
+  <main class="wrap">
+    <div class="destacados" id="destacados"></div>
 
-  <div class="notas">
-    <h3>
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
-      Información importante
-    </h3>
-    <ul id="notas-list"></ul>
-  </div>
+    <div class="sec-head reveal" style="--i:4">
+      <span class="sec-eyebrow">Servicios y tarifas</span>
+      <h2>Nuestros servicios</h2>
+    </div>
 
-  <p class="final-note" id="nota-final"></p>
-  <p class="footer-brand">NIT <span id="nit-txt"></span></p>
+    <div class="cats" id="categorias-container"></div>
+
+    <section class="notas reveal">
+      <h3>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></svg>
+        Información importante
+      </h3>
+      <ul id="notas-list"></ul>
+    </section>
+
+    <div class="final-note reveal" id="final-note" style="display:none;">
+      <span class="fn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span>
+      <span id="nota-final"></span>
+    </div>
+
+    <footer class="footer-brand">
+      <img src="logo.png" alt="">
+      <div><b>Avanza Rehabilitación Terapéutica</b></div>
+      <div>NIT <span id="nit-txt"></span></div>
+    </footer>
+  </main>
 </div>
 
 <div class="cta-bar" id="cta-bar">
   <a class="cta-btn" id="cta-btn" href="#" target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M9 15l1.8 1.8L15 13"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M9 15l1.8 1.8L15 13"/></svg>
     Agendar Cita Ahora
   </a>
 </div>
@@ -248,52 +359,145 @@
 
 <script>
 const COP = new Intl.NumberFormat('es-CO', { style:'currency', currency:'COP', maximumFractionDigits:0 });
-const dotColors = ['orange','blue','green'];
-const colorVars = { orange:'#E8823C', blue:'#3E8FC4', green:'#8FAE3E' };
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-const ICONS = {
-  flor: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><circle cx="12" cy="17" r="3"/><circle cx="7" cy="12" r="3"/><circle cx="17" cy="12" r="3"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></svg>`,
-  goniometro: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 L6 4"/><path d="M6 18 L19 11"/><path d="M10 18 A6 6 0 0 1 8.2 13.6"/><circle cx="6" cy="18" r="1.3" fill="currentColor" stroke="none"/></svg>`,
-  general: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6v12M6 12h12"/></svg>`
+// Paletas por tipo de servicio
+const PALETTES = {
+  orange:{ c:'#E8823C', c2:'#F2A867', cd:'#B3571A', soft:'rgba(232,130,60,.13)', glow:'rgba(232,130,60,.28)' },
+  blue:  { c:'#3E8FC4', c2:'#6FB6E0', cd:'#246E9E', soft:'rgba(62,143,196,.13)', glow:'rgba(62,143,196,.28)' },
+  green: { c:'#8FAE3E', c2:'#B5D05F', cd:'#566F17', soft:'rgba(143,174,62,.16)', glow:'rgba(143,174,62,.30)' }
 };
 
-function iconFor(nombre){
+// Ilustraciones de cada tipo de servicio
+const ART = {
+  // Pelvis: alas ilíacas, abertura pélvica, sacro y agujeros obturadores
+  pelvis: `<svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <path fill="currentColor" fill-rule="evenodd" d="M32 13C27 9 20 5 11 7C4 9 1 17 4 25C6 31 10 35 12 39C12 46 14 52 19 56C23 59 28 58 32 55C36 58 41 59 45 56C50 52 52 46 52 39C54 35 58 31 60 25C63 17 60 9 53 7C44 5 37 9 32 13ZM32 20C24.5 20 18.5 24.500 18.5 31C18.5 37 24.500 41.500 32 42C39.500 41.500 45.500 37 45.500 31C45.500 24.500 39.500 20 32 20Z"/>
+    <path fill="currentColor" d="M24 13L40 13L37.500 27L34 37L32 43L30 37L26.500 27Z"/>
+    <ellipse cx="21.500" cy="50" rx="2.600" ry="4.400" transform="rotate(-18 21.500 50)" fill="#fff"/>
+    <ellipse cx="42.500" cy="50" rx="2.600" ry="4.400" transform="rotate(18 42.500 50)" fill="#fff"/>
+    <path stroke="#fff" stroke-opacity=".8" stroke-width="2" stroke-linecap="round" d="M10 13C7 19 8 25 11 30M54 13C57 19 56 25 53 30"/>
+  </svg>`,
+  // Rodilla: fémur, menisco, tibia, rótula y flecha de movimiento
+  rodilla: `<svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <path fill="currentColor" d="M23 3H41C41 13 42 19 46 25C50 31 46 36 38 36C35 36 33 34.5 32 33C31 34.5 29 36 26 36C18 36 14 31 18 25C22 19 23 13 23 3Z"/>
+    <rect x="16" y="38" width="32" height="3.5" rx="1.75" fill="currentColor" fill-opacity=".35"/>
+    <path fill="currentColor" d="M17 44C17 43 18 43.5 19 43.5H45C46 43.5 47 43 47 44C47 49 43 50 42 54L41 61H23L22 54C21 50 17 49 17 44Z"/>
+    <ellipse cx="32" cy="29" rx="6" ry="6.5" fill="#fff" fill-opacity=".92"/>
+    <ellipse cx="32" cy="29" rx="6" ry="6.5" stroke="currentColor" stroke-width="2"/>
+    <path stroke="#E8823C" stroke-width="3" stroke-linecap="round" d="M54 14C60 24 60 40 54 50"/>
+    <path stroke="#E8823C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M49 49L54 51L55 45"/>
+  </svg>`,
+  // Servicio genérico: cruz médica
+  general: `<svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+    <rect x="23" y="8" width="18" height="48" rx="6" fill="currentColor"/>
+    <rect x="8" y="23" width="48" height="18" rx="6" fill="currentColor"/>
+    <circle cx="32" cy="32" r="5" fill="#fff" fill-opacity=".85"/>
+  </svg>`
+};
+
+function artFor(nombre){
   const n = (nombre || '').toLowerCase();
-  if(/p[eé]lvic|suelo/.test(n)) return ICONS.flor;
-  if(/f[ií]sica|terapia/.test(n)) return ICONS.goniometro;
-  return ICONS.general;
+  if(/p[eé]lvic|suelo|obst|uro/.test(n)) return { art:ART.pelvis, pal:PALETTES.orange };
+  if(/f[ií]sica|rodilla|articul|muscul|m[uú]scul|ortop|deport/.test(n)) return { art:ART.rodilla, pal:PALETTES.blue };
+  return { art:ART.general, pal:PALETTES.green };
+}
+
+// Iconos pequeños (trazo)
+const ICO = {
+  clip:   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M9.5 14l2 2 3.5-4"/></svg>`,
+  clock:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`,
+  layers: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg>`,
+  cal:    `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>`,
+  shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg>`,
+  heart:  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-9.3-9C1.2 8.9 3 5.5 6.3 5.2c2-.2 3.7.8 5.7 3 2-2.2 3.7-3.2 5.7-3 3.3.3 5.1 3.7 3.6 6.8C19 16.6 12 21 12 21z"/></svg>`,
+  dot:    `<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg>`
+};
+const TILE_ICO = { reloj:ICO.clock, calendario:ICO.cal, escudo:ICO.shield, corazon:ICO.heart };
+const TILE_COLORS = ['orange','blue','green'];
+
+function parseN(label){ const m = /(\d+)\s*sesi/i.exec(label || ''); return m ? +m[1] : null; }
+function kindOf(label){
+  if(/valoraci[oó]n/i.test(label)) return 'val';
+  if(/paquete/i.test(label) || (parseN(label) || 1) > 1) return 'paq';
+  if(/sesi[oó]n/i.test(label)) return 'ses';
+  return 'otro';
+}
+
+function renderItems(items){
+  const single = items.find(i => /^\s*1\s*sesi[oó]n/i.test(i.label));
+  const base = single ? Number(single.precio) : null;
+  const paqs = items.filter(i => kindOf(i.label) === 'paq');
+  const maxN = paqs.length ? Math.max(...paqs.map(i => parseN(i.label) || 0)) : 0;
+
+  return items.map(item => {
+    const kind = kindOf(item.label);
+    const n = parseN(item.label);
+    const precio = Number(item.precio) || 0;
+    const destacado = kind === 'paq' && n && n === maxN;
+    let sub = '';
+    let badge = '';
+    if(kind === 'paq' && n){
+      sub += `<span>${COP.format(Math.round(precio / n))} por sesión</span>`;
+      const save = base ? base * n - precio : 0;
+      if(save > 0){
+        sub += `<span class="save">Ahorras ${COP.format(save)}</span>`;
+        if(destacado) badge = '<span class="badge-best">Mejor valor</span>';
+      }
+    }
+    const ico = kind === 'val' ? ICO.clip : kind === 'paq' ? ICO.layers : kind === 'ses' ? ICO.clock : ICO.dot;
+    return `<div class="item-row${destacado ? ' destacado' : ''}">
+      ${badge}
+      <span class="item-ico">${ico}</span>
+      <div class="item-main">
+        <span class="item-label">${esc(item.label)}</span>
+        ${sub ? `<div class="item-sub">${sub}</div>` : ''}
+      </div>
+      <span class="item-price">${COP.format(precio)}</span>
+    </div>`;
+  }).join('');
 }
 
 function render(data){
-  document.getElementById('clinic-name').textContent = 'Avanza Rehabilitación Terapéutica';
+  document.getElementById('eyebrow').textContent = data.clinica || 'Consultorio de Terapia Física';
+  document.getElementById('hero-title').textContent = data.anio ? `Tarifas ${data.anio}` : 'Tarifas';
   document.getElementById('doctora-name').textContent = data.doctora || '';
-  document.getElementById('anio-txt').textContent = data.anio || '';
+  document.getElementById('doctora-pill').style.display = data.doctora ? '' : 'none';
   document.getElementById('nit-txt').textContent = data.nit || '';
 
-  const cont = document.getElementById('categorias-container');
-  cont.innerHTML = '';
-  (data.categorias || []).forEach((cat, i) => {
-    const card = document.createElement('div');
-    card.className = 'categoria';
-    const colorName = dotColors[i % dotColors.length];
-    const color = colorVars[colorName];
-    let rows = '';
-    (cat.items || []).forEach(item => {
-      const destacado = /paquete 10|10 sesiones/i.test(item.label) ? ' destacado' : '';
-      rows += `<div class="item-row${destacado}">
-        <span class="item-label">${item.label}</span>
-        <span class="item-price">${COP.format(item.precio)}</span>
-      </div>`;
-    });
-    card.innerHTML = `
-      <div class="cat-head">
-        <span class="cat-icon" style="background:${color}1F;color:${color}">${iconFor(cat.nombre)}</span>
-        <h2>${cat.nombre}</h2>
-      </div>
-      ${rows}`;
-    cont.appendChild(card);
-  });
+  // Datos destacados
+  const dest = document.getElementById('destacados');
+  const lista = data.destacados || [];
+  dest.innerHTML = lista.map((d, i) => {
+    const p = PALETTES[TILE_COLORS[i % TILE_COLORS.length]];
+    return `<div class="tile reveal" style="--i:${i + 3};--c:${p.c};--soft:${p.soft}">
+      <div class="tile-ico">${TILE_ICO[d.icono] || [ICO.clock, ICO.cal, ICO.shield][i % 3]}</div>
+      <b>${esc(d.titulo)}</b>
+      <span>${esc(d.texto)}</span>
+    </div>`;
+  }).join('');
+  dest.style.display = lista.length ? '' : 'none';
+  if(!lista.length) document.querySelector('.wrap').style.paddingTop = '34px';
 
+  // Categorías
+  const cont = document.getElementById('categorias-container');
+  cont.innerHTML = (data.categorias || []).map((cat, i) => {
+    const { art, pal } = artFor(cat.nombre);
+    const tags = (cat.etiquetas || []).filter(Boolean).map(t => `<span class="tag">${esc(t)}</span>`).join('');
+    return `<article class="categoria reveal" style="--i:${i + 5};--c:${pal.c};--c2:${pal.c2};--cd:${pal.cd};--soft:${pal.soft};--glow:${pal.glow}">
+      <div class="cat-top">
+        <div class="cat-head">
+          <div class="cat-art">${art}</div>
+          <h3 class="cat-title">${esc(cat.nombre)}</h3>
+        </div>
+        ${cat.descripcion ? `<p class="cat-desc">${esc(cat.descripcion)}</p>` : ''}
+        ${tags ? `<div class="tags">${tags}</div>` : ''}
+      </div>
+      <div class="rows">${renderItems(cat.items || [])}</div>
+    </article>`;
+  }).join('');
+
+  // Notas
   const notasList = document.getElementById('notas-list');
   notasList.innerHTML = '';
   (data.notas || []).forEach(n => {
@@ -302,7 +506,9 @@ function render(data){
     notasList.appendChild(li);
   });
 
+  const fn = document.getElementById('final-note');
   document.getElementById('nota-final').textContent = data.notaFinal || '';
+  fn.style.display = data.notaFinal ? '' : 'none';
 
   if(data.whatsapp){
     const phone = String(data.whatsapp).replace(/\D/g,'');

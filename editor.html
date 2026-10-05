@@ -81,6 +81,11 @@
   .field input{border:none;width:100%;font-size:14px;font-family:'Inter',sans-serif;}
   .field input:focus{outline:none;}
   #file-input{display:none;}
+  .cat-meta{display:grid;gap:8px;margin-bottom:12px;}
+  .cat-meta input{padding:8px 10px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;font-family:'Inter',sans-serif;}
+  .dest-row{flex-wrap:wrap;}
+  .dest-row select{padding:8px 6px;border:1px solid var(--line);border-radius:10px;font-size:13.5px;background:#fff;font-family:'Inter',sans-serif;}
+  .dest-row input[type=text]{min-width:110px;}
 </style>
 </head>
 <body>
@@ -113,6 +118,12 @@
     <div class="cat-title-row"><span style="font-family:'Sora',sans-serif;font-weight:700;">Notas / políticas</span></div>
     <div id="notas-editor"></div>
     <button class="add-item-btn" id="add-nota">+ Agregar nota</button>
+  </div>
+
+  <div class="categoria-box">
+    <div class="cat-title-row"><span style="font-family:'Sora',sans-serif;font-weight:700;">Datos destacados (recuadros bajo el encabezado)</span></div>
+    <div id="destacados-editor"></div>
+    <button class="add-item-btn" id="add-dest">+ Agregar dato destacado</button>
   </div>
 
   <div class="field" style="margin-bottom:20px;">
@@ -153,6 +164,13 @@ function categoriaBox(cat, catIdx){
     <button class="remove-cat-btn" data-cat="${catIdx}">Eliminar categoría</button>
   `;
   box.appendChild(head);
+  const meta = document.createElement('div');
+  meta.className = 'cat-meta';
+  meta.innerHTML = `
+    <input type="text" placeholder="Descripción corta: qué trata este servicio" value="${escAttr(cat.descripcion)}" data-cat="${catIdx}" data-field="descripcion">
+    <input type="text" placeholder="Etiquetas separadas por coma (ej: Lesiones, Dolor articular)" value="${escAttr((cat.etiquetas || []).join(', '))}" data-cat="${catIdx}" data-field="etiquetas">
+  `;
+  box.appendChild(meta);
   const itemsWrap = document.createElement('div');
   itemsWrap.className = 'items-wrap';
   (cat.items || []).forEach((item, itemIdx) => itemsWrap.appendChild(itemRow(catIdx, itemIdx, item)));
@@ -179,6 +197,24 @@ function renderEditor(){
   catCont.innerHTML = '';
   (data.categorias || []).forEach((cat, i) => catCont.appendChild(categoriaBox(cat, i)));
 
+  data.destacados = data.destacados || [];
+  const destCont = document.getElementById('destacados-editor');
+  destCont.innerHTML = '';
+  const iconos = [['reloj','Reloj'],['calendario','Calendario'],['escudo','Escudo'],['corazon','Corazón']];
+  data.destacados.forEach((d, i) => {
+    const row = document.createElement('div');
+    row.className = 'item-edit-row dest-row';
+    row.innerHTML = `
+      <select data-dest="${i}" data-dfield="icono">
+        ${iconos.map(([v, t]) => `<option value="${v}"${d.icono === v ? ' selected' : ''}>${t}</option>`).join('')}
+      </select>
+      <input type="text" placeholder="Título (ej: 55 min)" value="${escAttr(d.titulo)}" data-dest="${i}" data-dfield="titulo" style="flex:0 1 150px;">
+      <input type="text" placeholder="Texto (ej: por sesión)" value="${escAttr(d.texto)}" data-dest="${i}" data-dfield="texto">
+      <button class="icon-btn remove-dest" data-dest="${i}" title="Eliminar">✕</button>
+    `;
+    destCont.appendChild(row);
+  });
+
   const notasCont = document.getElementById('notas-editor');
   notasCont.innerHTML = '';
   (data.notas || []).forEach((nota, i) => {
@@ -204,6 +240,27 @@ function attachListeners(){
   document.querySelectorAll('[data-field="nombre"]').forEach(inp => {
     inp.addEventListener('input', e => {
       data.categorias[+e.target.dataset.cat].nombre = e.target.value;
+    });
+  });
+  document.querySelectorAll('[data-field="descripcion"]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      data.categorias[+e.target.dataset.cat].descripcion = e.target.value;
+    });
+  });
+  document.querySelectorAll('[data-field="etiquetas"]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      data.categorias[+e.target.dataset.cat].etiquetas = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+    });
+  });
+  document.querySelectorAll('[data-dfield]').forEach(inp => {
+    const handler = e => { data.destacados[+e.target.dataset.dest][e.target.dataset.dfield] = e.target.value; };
+    inp.addEventListener('input', handler);
+    inp.addEventListener('change', handler);
+  });
+  document.querySelectorAll('.remove-dest').forEach(btn => {
+    btn.addEventListener('click', e => {
+      data.destacados.splice(+e.currentTarget.dataset.dest, 1);
+      renderEditor();
     });
   });
   document.querySelectorAll('.remove-item').forEach(btn => {
@@ -240,6 +297,11 @@ function attachListeners(){
 
 document.getElementById('add-cat').addEventListener('click', () => {
   data.categorias.push({ nombre: 'Nueva categoría', items: [{ label: 'Nuevo servicio', precio: 0 }] });
+  renderEditor();
+});
+document.getElementById('add-dest').addEventListener('click', () => {
+  data.destacados = data.destacados || [];
+  data.destacados.push({ icono: 'reloj', titulo: '', texto: '' });
   renderEditor();
 });
 document.getElementById('add-nota').addEventListener('click', () => {
@@ -292,8 +354,8 @@ fetch('precios.json', { cache: 'no-store' })
   .then(json => { data = json; renderEditor(); })
   .catch(() => {
     data = {
-      doctora: '', anio: '', nit: '', whatsapp: '',
-      categorias: [{ nombre: 'Nueva categoría', items: [{ label: 'Nuevo servicio', precio: 0 }] }],
+      doctora: '', anio: '', nit: '', whatsapp: '', destacados: [],
+      categorias: [{ nombre: 'Nueva categoría', descripcion: '', etiquetas: [], items: [{ label: 'Nuevo servicio', precio: 0 }] }],
       notas: [], notaFinal: ''
     };
     renderEditor();
